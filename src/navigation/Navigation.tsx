@@ -1,10 +1,12 @@
 import React from 'react';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {NavigationContainer} from '@react-navigation/native';
-import {HomeScreen, ProfileScreen} from '../screens';
-import {SCREENS} from './paths';
+import {HomeScreen, ProfileScreen, DetailsScreen} from '../screens';
+import {PATHS} from './paths';
 const Tab = createBottomTabNavigator();
+const Stack = createNativeStackNavigator();
 const renderTabIcon = (
   route: any,
   focused: boolean,
@@ -13,10 +15,10 @@ const renderTabIcon = (
 ) => {
   let iconName = 'home';
   switch (route.name) {
-    case SCREENS.HOME:
+    case PATHS.HOME:
       iconName = focused ? 'home' : 'home-outline';
       break;
-    case SCREENS.PROFILE:
+    case PATHS.PROFILE:
       iconName = focused ? 'person' : 'person-outline';
       break;
     default:
@@ -25,6 +27,18 @@ const renderTabIcon = (
   }
   return <Icon name={iconName} size={size} color={color} />;
 };
+function HomeStack() {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+        options={{headerShown: false}}
+        name={PATHS.HOME}
+        component={HomeScreen}
+      />
+      <Stack.Screen name={PATHS.DETAILS} component={DetailsScreen} />
+    </Stack.Navigator>
+  );
+}
 const Navigation = () => {
   return (
     <NavigationContainer>
@@ -34,8 +48,8 @@ const Navigation = () => {
           tabBarIcon: ({focused, color, size}) =>
             renderTabIcon(route, focused, color, size),
         })}>
-        <Tab.Screen name={SCREENS.HOME} component={HomeScreen} />
-        <Tab.Screen name={SCREENS.PROFILE} component={ProfileScreen} />
+        <Tab.Screen name={PATHS.HOME} component={HomeStack} />
+        <Tab.Screen name={PATHS.PROFILE} component={ProfileScreen} />
       </Tab.Navigator>
     </NavigationContainer>
   );
