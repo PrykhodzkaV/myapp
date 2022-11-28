@@ -1,5 +1,6 @@
 export enum PATHS {
-  HOME = 'Home',
+  STACKHOME = 'Home',
+  HOME = 'HomeScreen',
   PROFILE = 'Profile',
   DETAILS = 'Details',
 }

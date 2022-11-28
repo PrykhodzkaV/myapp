@@ -27,7 +27,7 @@ const renderTabIcon = (
   }
   return <Icon name={iconName} size={size} color={color} />;
 };
-function HomeStack() {
+const HomeStack = () => {
   return (
     <Stack.Navigator>
       <Stack.Screen
@@ -38,7 +38,7 @@ function HomeStack() {
       <Stack.Screen name={PATHS.DETAILS} component={DetailsScreen} />
     </Stack.Navigator>
   );
-}
+};
 const Navigation = () => {
   return (
     <NavigationContainer>
@@ -48,7 +48,7 @@ const Navigation = () => {
           tabBarIcon: ({focused, color, size}) =>
             renderTabIcon(route, focused, color, size),
         })}>
-        <Tab.Screen name={PATHS.HOME} component={HomeStack} />
+        <Tab.Screen name={PATHS.STACKHOME} component={HomeStack} />
         <Tab.Screen name={PATHS.PROFILE} component={ProfileScreen} />
       </Tab.Navigator>
     </NavigationContainer>
